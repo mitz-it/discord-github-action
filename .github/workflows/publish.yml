@@ -3,7 +3,9 @@ name: Publish Action Image
 on:
   push:
     branches: [main]
-    
+  release: 
+    types: [created]
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
