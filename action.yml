@@ -24,7 +24,7 @@ inputs:
     required: false
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "docker://ghcr.io/mitz-it/discord-message-action"
   args:
     - "message"
     - "--token"
