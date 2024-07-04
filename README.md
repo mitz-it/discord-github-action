@@ -47,7 +47,6 @@ jobs:
           token: ${{ secrets.DISCORD_BOT_TOKEN }}
           channel-id: ${{ secrets.DISCORD_CHANNEL_ID }}
           message-content: "Hello from GitHub"
-          emote-id: ${{ env.EMOTE_ID }}
           emote-name: ${{ env.EMOTE_NAME }}
           emote-animated: false
 ```
@@ -61,7 +60,7 @@ on:
     types: [ labeled ]
 
 env:
-  EMOTE_ID: 1234567891011121314
+  EMOTE_ID: "1234567891011121314"
   EMOTE_NAME: custom
 
 jobs:
