@@ -17,7 +17,7 @@ inputs:
     description: "The emote ID for the message reaction"
     required: false
   emote-name:
-    description: "The emote name for the message reaction"
+    description: "The emote name for the message reaction, when emote ID is not provided use the following format: <:EMOTE_NAME:EMOTE_ID>"
     required: false
   emote-animated:
     description: "The emote animation mode for the message reaction"
