@@ -35,7 +35,7 @@ on:
     types: [ labeled ]
 
 env:
-  EMOTE_NAME: smiley
+  EMOTE_NAME: "<:smiley:1234567891011121314>"
 
 jobs:
   discord:
