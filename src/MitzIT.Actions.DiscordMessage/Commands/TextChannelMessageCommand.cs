@@ -21,7 +21,7 @@ public class DiscordMessageParameters : ICommandParameterSet
     [HasDefaultValue]
     public ulong? EmoteId { get; set; } = null;
 
-    [Option('n', Description = "The emote name for the message reaction")]
+    [Option('n', Description = "The emote name for the message reaction, when emote ID is not provided use the following format: <:EMOTE_NAME:EMOTE_ID>")]
     [HasDefaultValue]
     public string? EmoteName { get; set; } = null;
 
@@ -80,9 +80,7 @@ public class TextChannelMessageCommand
         {
             if (message is not null)
             {
-                var emote = parameters.EmoteId is not null && !string.IsNullOrWhiteSpace(parameters.EmoteName) ?
-                    new Emote(parameters.EmoteId.Value, parameters.EmoteName, parameters.EmoteAnimated)
-                    : Emote.Parse(parameters.EmoteName);
+                var emote = TryParseEmote(parameters);
                 
                 if (emote is null) return;
                 
@@ -104,5 +102,17 @@ public class TextChannelMessageCommand
 
             throw new CommandExitedException(exitCode: 1);
         }
+    }
+
+    private static Emote? TryParseEmote(DiscordMessageParameters parameters)
+    {
+        if (parameters.EmoteId is not null && !string.IsNullOrWhiteSpace(parameters.EmoteName))
+        {
+            return new Emote(parameters.EmoteId.Value, parameters.EmoteName, parameters.EmoteAnimated);
+        }
+
+        _ = Emote.TryParse(parameters.EmoteName, out var emote);
+
+        return emote;
     }
 }
